@@ -21,3 +21,5 @@ jobs:
       run: dotnet restore
     - name: Run demo
       run: dotnet run --no-restore
+    - name: Re-run demo
+      run: dotnet run --no-restore

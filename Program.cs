@@ -16,7 +16,7 @@ namespace cached_resty_linq_example
         static void Main(string[] args)
         {
             var LiteDbFile = Path.Join(Path.GetTempPath(), "commits_cache.db");
-            // File.Delete(LiteDbFile); // clear cache
+            // File.Delete(LiteDbFile); // clear the cache
             var cache = new PersistentMemoryCache.PersistentMemoryCache(new PersistentMemoryCacheOptions("queries",
                 new LiteDbStore(new LiteDbOptions(
                     LiteDbFile
