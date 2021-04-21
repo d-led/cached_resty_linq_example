@@ -12,8 +12,7 @@ namespace cached_resty_linq_example
 {
     class Program
     {
-
-        static void Main(string[] args)
+        void Main()
         {
             var LiteDbFile = Path.Join(Path.GetTempPath(), "commits_cache.db");
             // File.Delete(LiteDbFile); // clear the cache
@@ -23,12 +22,12 @@ namespace cached_resty_linq_example
             ))));
             LiteDbFile.Dump();
 
-            var commits = cache.GetOrCreate<List<CommitDetails>>("commits", _ => Commits());
+            var commits = cache.GetOrCreate("commits", _ => Commits());
 
             commits
                 .Select(c => new
                 {
-                    Sha = c.Sha,
+                    c.Sha,
                     Message = c.Commit.Message.Shorten()
                 })
                 .Dump()
@@ -55,6 +54,11 @@ namespace cached_resty_linq_example
         class CommitInfo
         {
             public string Message { get; set; }
+        }
+
+        static void Main(string[] args)
+        {
+            new Program().Main();
         }
     }
 }
